@@ -1,4 +1,4 @@
-// this file will contain the schema of the address model
+// this file will contain the schema of the product model
 
 const mongoose = require("mongoose");
 
@@ -7,34 +7,29 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    contactNumber: {
-        type: String,
-        require: true,
-        minLenght : 10,
-    },
-    street: {
+    category: {
         type: String,
         require: true,
     },
-    landmark: {
+    price: {
+        type: Number,
+        require: true,
+    },
+    description: {
         type: String,
         require: true,
     },
-    city: {
+    manufacturer: {
         type: String,
         require: true,
     },
-    state: {
-        type: String,
+    availableItems: {
+        type: Number,
         require: true,
     },
-    zipCode: {
+    imageUrl: {
         type: String,
         require: true,
-    },
-    user : {
-        type : mongoose.SchemaTypes.ObjectId,
-        ref : "User"
     },
     createdAt: {
         type: Date,
@@ -52,4 +47,4 @@ const userSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model("Address", userSchema);
+module.exports = mongoose.model("Product", userSchema);

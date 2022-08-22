@@ -10,7 +10,7 @@ module.exports = (app) => {
     /**
      * Define the route for sign up
      * 
-     * POST /eshop/api/v1/auth/signup/users -> auth controller sign up method
+     * POST /eshop/api/v1/auth/signup/users -> auth controller signupUser method
      */
     app.post("/eshop/api/v1/auth/signup/users", authController.signupUser);
 

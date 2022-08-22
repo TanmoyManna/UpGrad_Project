@@ -39,3 +39,7 @@ DB.on("error", () => {
 DB.once("open", () => {
   console.log("Successfully connected to the database");
 });
+
+
+
+// db.inventory.aggregate([ {"$group" : {_id:"$_id",item:{$first:"$item"}}} ])

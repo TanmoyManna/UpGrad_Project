@@ -8,9 +8,9 @@
  module.exports = (app) => {
  
      /**
-      * Define the route for sign up
+      * Define the route to add address
       * 
-      * POST /eshop/api/v1/address -> auth controller sign up method
+      * POST /eshop/api/v1/address -> addressController addAddress method
       */
      app.post("/eshop/api/v1/addresses", addressController.addAddress);
  

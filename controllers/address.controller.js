@@ -19,7 +19,7 @@ exports.addAddress = async (req, res) => {
      * inserted in the DB
      */
     try {
-        const AddressObj = {
+        const addressObj = {
             name: req.body.name,
             contactNumber: req.body.contactNumber,
             street: req.body.street,
@@ -33,7 +33,7 @@ exports.addAddress = async (req, res) => {
         /**
          * Insert  the data in the databse
          */
-        const savedAddress = await Address.create(AddressObj);
+        const savedAddress = await Address.create(addressObj);
 
         /**
          * we need to have bidirectional relationship for address and user
