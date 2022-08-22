@@ -2,7 +2,7 @@ const User = require("../models/user.model");
 const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 const contactNumberRegexp = /^[0-9]{10,10}$/;
 
-const validateSignUpReqBody = (req, res, next) => {
+const validateSignUpReqBody = async (req, res, next) => {
 
     // Check if all required things are present
     if (!req.body.email) {
@@ -17,12 +17,12 @@ const validateSignUpReqBody = (req, res, next) => {
     }
     if (!req.body.first_name) {
         return res.status(400).send({
-            message: "First name of the User is missing"
+            message: "first_name of the User is missing"
         });
     }
     if (!req.body.last_name) {
         return res.status(400).send({
-            message: "Last name of the User is missing"
+            message: "last_name of the User is missing"
         });
     }
     if (!req.body.contactNumber) {
@@ -36,7 +36,7 @@ const validateSignUpReqBody = (req, res, next) => {
             message: "Invalid email format!"
         });
     }
-    const user = User.findOne({email:req.body.email})
+    const user = await User.findOne({email:req.body.email})
     if (user) {
         return res.status(400).send({
             message: "Try any other email, this email is already registered!"

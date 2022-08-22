@@ -16,21 +16,21 @@ exports.addOrder = async (req, res) => {
      */
     try {
 
-        const orderedProuct = Product.findById(req.body.productId);
+        const orderedProuct = await Product.findOne({_id : req.body.productId});
         if (!orderedProuct) {
             return res.status(404).send({
                 message: `No Product found for ID - ${req.body.productId} !`
             });
         }
-
-        const deliveryAddress = Address.findById(req.body.addressId);
+        const deliveryAddress = await Address.findOne({_id : req.body.addressId});
+        console.log(deliveryAddress);
         if (!deliveryAddress) {
             return res.status(404).send({
                 message: `No Address  found for ID - ${req.body.addressId} !`
             });
         }
 
-        if (!orderedProuct.availableItems || orderedProuct.availableItems < req.body.quantity) {
+        if (!orderedProuct.availableItems || req.body.quantity > orderedProuct.availableItems) {
             return res.status(404).send({
                 message: `Product with ID - ${req.body.productId} is currently out of stock!`
             });
@@ -46,11 +46,16 @@ exports.addOrder = async (req, res) => {
          */
         const savedOdered = await Order.create(orderObj);
 
+        orderedProuct.availableItems = orderedProuct.availableItems - req.body.quantity;
+        await orderedProuct.save();
+
         const postResponse = {
             addressId: savedOdered.addressId,
             productId: savedOdered.productId,
             quantity: savedOdered.quantity,
         }
+
+
         /**
          * Return the success response to the customer
          */

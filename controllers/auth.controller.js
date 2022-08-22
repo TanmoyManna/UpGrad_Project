@@ -64,7 +64,7 @@ exports.signin = async (req, res) => {
         /**
          * Read the userId and password from the request
          */
-        const emailFromReq = req.body.userId;
+        const emailFromReq = req.body.email;
         const passwordFromReq = req.body.password;
 
         /**

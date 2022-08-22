@@ -70,30 +70,20 @@ exports.updateProduct = async (req, res) => {
                 message: `No Product found for ID - ${req.params.id} !`
             })
         }
-
-        const productObj = {
-            name: req.body.name,
-            category: req.body.category,
-            price: req.body.price,
-            description: req.body.description,
-            manufacturer: req.body.manufacturer,
-            availableItems: req.body.availableItems,
-            imageUrl: req.body.imageUrl,
-        }
         /**
          * Update the product object based on the request
          */
-        productObj.name = req.body.name != undefined ? req.body.name : productObj.name;
-        productObj.category = req.body.category != undefined ? req.body.category : productObj.category;
-        productObj.price = req.body.price != undefined ? req.body.price : productObj.price;
-        productObj.description = req.body.description != undefined ? req.body.description : productObj.description;
-        productObj.manufacturer = req.body.manufacturer != undefined ? req.body.manufacturer : productObj.manufacturer;
-        productObj.availableItems = req.body.availableItems != undefined ? req.body.availableItems : productObj.availableItems;
+        productToBeUpdated.name = req.body.name != undefined ? req.body.name : productToBeUpdated.name;
+        productToBeUpdated.category = req.body.category != undefined ? req.body.category : productToBeUpdated.category;
+        productToBeUpdated.price = req.body.price != undefined ? req.body.price : productToBeUpdated.price;
+        productToBeUpdated.description = req.body.description != undefined ? req.body.description : productToBeUpdated.description;
+        productToBeUpdated.manufacturer = req.body.manufacturer != undefined ? req.body.manufacturer : productToBeUpdated.manufacturer;
+        productToBeUpdated.availableItems = req.body.availableItems != undefined ? req.body.availableItems : productToBeUpdated.availableItems;
 
         /**
          * Save the Product object and return the updated object
          */
-        const updatedProduct = await productObj.save();
+        const updatedProduct = await productToBeUpdated.save();
 
 
         const postResponse = {
