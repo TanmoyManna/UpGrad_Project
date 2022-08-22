@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => {
     const token = req.headers['x-access-token'];
     if (!token) {
         return res.status(400).send({
-            message: "No token provided"
+            message: "Please login first to access this endpoint!"
         });
     }
     /**
@@ -42,7 +42,6 @@ const verifyToken = (req, res, next) => {
 /**
  * Middleware to go and check if the user is ADMIN
  */
-
 const isAdmin = async (req, res, next) => {
 
     const user = await userModel.findById(req.userId);
@@ -51,7 +50,23 @@ const isAdmin = async (req, res, next) => {
         next();
     } else {
         return res.status(403).send({
-            message: "Only ADMIN is allowed"
+            message: "You are not authorised to access this endpoint!"
+        })
+    }
+}
+
+/**
+ * Middleware to go and check if the user is USER
+ */
+ const isUser = async (req, res, next) => {
+
+    const user = await userModel.findById(req.userId);
+
+    if (user && user.user_role == "USER") {
+        next();
+    } else {
+        return res.status(403).send({
+            message: "You are not authorised to access this endpoint."
         })
     }
 }
@@ -59,5 +74,5 @@ const isAdmin = async (req, res, next) => {
 module.exports = {
     verifyToken: verifyToken,
     isAdmin: isAdmin,
-    isAdminOrOwner: isAdminOrOwner
+    isUser: isUser
 }

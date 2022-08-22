@@ -3,7 +3,7 @@
  */
 
 const authController = require("../controllers/auth.controller");
-
+const userValidator  = require("../middlewares/user.middleware");
 
 module.exports = (app) => {
 
@@ -12,7 +12,7 @@ module.exports = (app) => {
      * 
      * POST /eshop/api/v1/auth/signup/users -> auth controller signupUser method
      */
-    app.post("/eshop/api/v1/auth/signup/users", authController.signupUser);
+    app.post("/eshop/api/v1/auth/signup/users",[userValidator.validateSignUpReqBody], authController.signupUser);
 
     /**
      * Define the route for the sign in

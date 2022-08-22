@@ -3,7 +3,9 @@
  */
 
  const addressController = require("../controllers/address.controller");
-
+ const auth = require("../middlewares/authjwt");
+ const addressesValidator  = require("../middlewares/address.middleware");
+ 
 
  module.exports = (app) => {
  
@@ -12,6 +14,6 @@
       * 
       * POST /eshop/api/v1/address -> addressController addAddress method
       */
-     app.post("/eshop/api/v1/addresses", addressController.addAddress);
+     app.post("/eshop/api/v1/addresses",[auth.verifyToken, addressesValidator.validateAddressReqBody], addressController.addAddress);
  
  }

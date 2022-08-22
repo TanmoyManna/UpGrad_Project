@@ -3,7 +3,7 @@
  */
 
 const productController = require("../controllers/product.controller");
-
+const auth = require("../middlewares/authjwt");
 
 module.exports = (app) => {
 
@@ -12,21 +12,21 @@ module.exports = (app) => {
      * 
      * POST /eshop/api/v1/products -> productController addProduct method
      */
-    app.post("/eshop/api/v1/products", productController.addProduct);
+    app.post("/eshop/api/v1/products",[auth.verifyToken, auth.isAdmin], productController.addProduct);
 
     /**
     * Define the route to update product
     * 
     * PUT /eshop/api/v1/products -> productController updateProduct method
     */
-    app.put("/eshop/api/v1/products/:id", productController.updateProduct);
+    app.put("/eshop/api/v1/products/:id",[auth.verifyToken, auth.isAdmin], productController.updateProduct);
 
     /**
      * Define the route to delete product
      * 
      * DELETE /eshop/api/v1/products -> productController deleteProduct method
      */
-    app.delete("/eshop/api/v1/products/:id", productController.deleteProduct);
+    app.delete("/eshop/api/v1/products/:id",[auth.verifyToken, auth.isAdmin], productController.deleteProduct);
 
 
     /**
@@ -41,6 +41,14 @@ module.exports = (app) => {
     * 
     * POST /eshop/api/v1/products -> productController getProducts method
     */
-     app.get("/eshop/api/v1/products", productController.getProducts);
+    app.get("/eshop/api/v1/products", productController.getProducts);
+
+    /**
+   * Define the route to search products
+   * 
+   * POST /eshop/api/v1/products/categories -> productController getProductCategories method
+   */
+    app.get("/eshop/api/v1/products/categories", productController.getProductCategories);
+
 
 }

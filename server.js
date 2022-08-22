@@ -22,7 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
  */
 require("./routes/auth.route")(app);
 require("./routes/address.route")(app);
-
+require("./routes/product.route")(app);
+require("./routes/order.route")(app);
 // To start  our server
 app.listen(serverConfig.PORT, () => {
   console.log(`Server started on port ${serverConfig.PORT}`);
@@ -37,7 +38,3 @@ DB.on("error", () => {
 DB.once("open", () => {
   console.log("Successfully connected to the database");
 });
-
-
-
-// db.inventory.aggregate([ {"$group" : {_id:"$_id",item:{$first:"$item"}}} ])

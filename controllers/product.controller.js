@@ -194,12 +194,37 @@ exports.getProducts = async (req, res) => {
             queryObj.name = productName;
         }
 
-        const sortBy  = req.query.sortBy;
+        const sortBy = req.query.sortBy;
         if (sortBy) {
-            sortObj.category = productCategory;
+            sortObj[`${sortBy}`] = 1;
         }
+        const direction = req.query.direction;
+        if (direction == 'DESC') {
+            sortObj[`${sortBy}`] = -1;
+        }
+        const allProucts = await Product.find(queryObj).sort(sortObj);
 
 
+
+        res.status(200).send({ content: allProucts, filter: queryObj, sortBy: sortObj });
+
+    } catch (err) {
+        console.log("Error while Adding Address ", err.message);
+        res.status(500).send({
+            message: "Some internal server error"
+        })
+    }
+}
+exports.getProductCategories = async (req, res) => {
+    try {
+        const allCategories = await Product.aggregate([[{ "$group": { _id: "$_id", category: { $first: "$category" } } }]]);
+
+        const onlyCategories = [];
+
+        allCategories.forEach(element => {
+            onlyCategories.push(element.element);
+        });
+        res.status(200).send(allCategories);
     } catch (err) {
         console.log("Error while Adding Address ", err.message);
         res.status(500).send({

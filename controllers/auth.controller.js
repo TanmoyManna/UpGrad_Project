@@ -11,7 +11,7 @@ const authConfig = require("../configs/auth.config");
 /**
  * Create a function to allow the user to sign 
  * 
- * we will do the req body validation like unique email,user_name correct format of email and contactNumber in the middleware
+ * we will do the req body validation like unique email correct format of email and contactNumber in the middleware
  *
  */
 exports.signupUser = async (req, res) => {
@@ -26,7 +26,6 @@ exports.signupUser = async (req, res) => {
             last_name: req.body.last_name,
             password: bcrypt.hashSync(req.body.password, 8),
             contactNumber: req.body.contactNumber,
-            user_name: req.body.user_name,
         }
 
         /**
@@ -38,7 +37,6 @@ exports.signupUser = async (req, res) => {
             email: savedUser.email,
             first_name: savedUser.first_name,
             last_name: savedUser.last_name,
-            user_name: savedUser.user_name,
             _id: savedUser._id,
             createdAt: savedUser.createdAt,
             updatedAt: savedUser.updatedAt
@@ -109,7 +107,6 @@ exports.signin = async (req, res) => {
         res.status(200).send({            
             email: userSaved.email,
             name: userSaved.first_name +' '+ userSaved.last_name,
-            user_name: userSaved.user_name,
             accessToke: token,
         });
 

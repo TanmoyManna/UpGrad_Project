@@ -26,11 +26,6 @@ const userSchema = new mongoose.Schema({
         require : true,        
         minLenght : 10,
     },
-    user_name: {
-        type: String,
-        require: true,
-        unique: true
-    },
     user_role: {
         type: String,
         require: true,
