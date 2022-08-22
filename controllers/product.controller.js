@@ -177,3 +177,33 @@ exports.getProduct = async (req, res) => {
         })
     }
 }
+exports.getProducts = async (req, res) => {
+    try {
+        /**
+         * Read the query params if any
+         */
+        const queryObj = {};
+        const sortObj = {};
+
+        const productCategory = req.query.category;
+        if (productCategory) {
+            queryObj.category = productCategory;
+        }
+        const productName = req.query.name;
+        if (productName) {
+            queryObj.name = productName;
+        }
+
+        const sortBy  = req.query.sortBy;
+        if (sortBy) {
+            sortObj.category = productCategory;
+        }
+
+
+    } catch (err) {
+        console.log("Error while Adding Address ", err.message);
+        res.status(500).send({
+            message: "Some internal server error"
+        })
+    }
+}
