@@ -3,43 +3,38 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-    email: {
+    name: {
         type: String,
-        unique: true,
         require: true,
-        lowercase: true
     },
-    first_name: {
+    contactNumber: {
         type: String,
-        require: true
-    },
-    last_name: {
-        type: String,
-        require: true
-    },        
-    password: {
-        type: String,
-        require: true
-    },
-    phone : {
-        type : Number,
-        require : true,        
+        require: true,
         minLenght : 10,
     },
-    user_name: {
+    street: {
         type: String,
         require: true,
-        unique: true
     },
-    user_role: {
+    landmark: {
         type: String,
         require: true,
-        default: "USER",
-        enum : ["USER", "ADMIN"]
     },
-    address : {
-        type : [mongoose.SchemaTypes.ObjectId],
-        ref : "Address"
+    city: {
+        type: String,
+        require: true,
+    },
+    state: {
+        type: String,
+        require: true,
+    },
+    zipCode: {
+        type: String,
+        require: true,
+    },
+    user : {
+        type : mongoose.SchemaTypes.ObjectId,
+        ref : "User"
     },
     createdAt: {
         type: Date,
@@ -57,4 +52,4 @@ const userSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Address", userSchema);

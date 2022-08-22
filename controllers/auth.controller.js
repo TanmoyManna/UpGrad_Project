@@ -9,10 +9,7 @@ const authConfig = require("../configs/auth.config");
 
 
 /**
- * Create a function to allow the user to sign
- * 
- * Wheneve a user calls the endpoint :
- * POST /crm/api/v1/signup/users ==> router should call the below method
+ * Create a function to allow the user to sign 
  * 
  * we will do the req body validation like unique email,user_name correct format of email and phone in the middleware
  *

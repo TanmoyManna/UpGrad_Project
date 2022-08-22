@@ -9,7 +9,7 @@ const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-var cors = require('cors') 
+var cors = require('cors')
 app.use(cors())
 
 // To convert JSON to Js Objects and vice versa
@@ -20,7 +20,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 /**
  * Plugging in the routes
  */
- require("./routes/auth.route")(app);
+require("./routes/auth.route")(app);
+require("./routes/address.route")(app);
 
 // To start  our server
 app.listen(serverConfig.PORT, () => {
