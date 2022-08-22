@@ -14,7 +14,7 @@ const authConfig = require("../configs/auth.config");
  * Wheneve a user calls the endpoint :
  * POST /crm/api/v1/signup/users ==> router should call the below method
  * 
- * we will do the req body validation like unique email,user_name correct format of email and phone in the middleware
+ * we will do the req body validation like unique email,user_name correct format of email and contactNumber in the middleware
  *
  */
 exports.signupUser = async (req, res) => {
@@ -28,7 +28,7 @@ exports.signupUser = async (req, res) => {
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             password: bcrypt.hashSync(req.body.password, 8),
-            phone: req.body.phone,
+            contactNumber: req.body.contactNumber,
             user_name: req.body.user_name,
         }
 

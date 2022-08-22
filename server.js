@@ -28,9 +28,7 @@ app.listen(serverConfig.PORT, () => {
 });
 
 // To connect to the databse
-const connectionOptions = { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
-
-mongoose.connect(dbConfig.DB_URL, connectionOptions);
+mongoose.connect(dbConfig.DB_URL);
 const DB = mongoose.connection;
 DB.on("error", () => {
   console.log("Error while connecting to the database");
